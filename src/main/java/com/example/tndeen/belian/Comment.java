@@ -8,6 +8,16 @@ public class Comment {
     private long id;
     private String comment;
 
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    private String detail;
+
     public long getId() {
         return id;
     }
@@ -27,6 +37,6 @@ public class Comment {
     // Will be used by the ArrayAdapter in the ListView
     @Override
     public String toString() {
-        return comment;
+        return comment + detail;
     }
 }
