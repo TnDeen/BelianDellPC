@@ -1,7 +1,11 @@
 package com.example.tndeen.belian;
 
 import android.app.ListActivity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -9,9 +13,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.List;
 import java.util.Random;
 
+import com.opencsv.CSVWriter;
 /**
  * Created by TnDeen on 15/03/2016.
  */
@@ -46,7 +53,7 @@ public class Belian extends ListActivity {
 
                 String item = ((TextView) view).getText().toString();
 
-                Toast.makeText(getBaseContext(), item, Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), item, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -83,6 +90,39 @@ public class Belian extends ListActivity {
 
     private void ExportDB(){
 
+        File dbFile=getDatabasePath("commments.db");
+        MySQLiteHelper dbhelper = new MySQLiteHelper(getApplicationContext());
+        File exportDir = new File(Environment.getExternalStorageDirectory(), "");
+        if (!exportDir.exists())
+        {
+            exportDir.mkdirs();
+        }
+
+        File file = new File(exportDir, "Belian.csv");
+        try
+        {
+
+            file.createNewFile();
+            CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
+            SQLiteDatabase db = dbhelper.getReadableDatabase();
+            Cursor curCSV = db.rawQuery("SELECT * FROM comments",null);
+            csvWrite.writeNext(curCSV.getColumnNames());
+            while(curCSV.moveToNext())
+            {
+                //Which column you want to exprort
+                String arrStr[] ={curCSV.getString(0),curCSV.getString(1),curCSV.getString(2),
+                        curCSV.getString(3),curCSV.getString(4),curCSV.getString(5),curCSV.getString(6)};
+                csvWrite.writeNext(arrStr);
+            }
+            csvWrite.close();
+            curCSV.close();
+            Toast.makeText(getApplicationContext(), "Data Exported!", Toast.LENGTH_SHORT)
+                    .show();
+        }
+        catch(Exception sqlEx)
+        {
+            Log.e("MainActivity", sqlEx.getMessage(), sqlEx);
+        }
     }
 
     @Override
