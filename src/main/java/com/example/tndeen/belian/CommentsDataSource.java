@@ -18,7 +18,9 @@ public class CommentsDataSource {
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
     private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
-            MySQLiteHelper.COLUMN_COMMENT,MySQLiteHelper.COLUMN_DETAIL  };
+            MySQLiteHelper.COLUMN_COMMENT, MySQLiteHelper.COLUMN_KG,
+            MySQLiteHelper.COLUMN_MULTIPLY, MySQLiteHelper.COLUMN_RM,
+            MySQLiteHelper.COLUMN_DATE, MySQLiteHelper.COLUMN_DETAIL};
 
     public CommentsDataSource(Context context) {
         dbHelper = new MySQLiteHelper(context);
@@ -35,7 +37,11 @@ public class CommentsDataSource {
     public Comment createComment(String comment) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_COMMENT, comment);
-        values.put(MySQLiteHelper.COLUMN_DETAIL, comment);
+        values.put(MySQLiteHelper.COLUMN_KG, "1.2");
+        values.put(MySQLiteHelper.COLUMN_MULTIPLY, "3.5");
+        values.put(MySQLiteHelper.COLUMN_RM, "34.67");
+        values.put(MySQLiteHelper.COLUMN_DATE, "11/02/1989");
+        values.put(MySQLiteHelper.COLUMN_DETAIL, "Details");
         long insertId = database.insert(MySQLiteHelper.TABLE_COMMENTS, null,
                 values);
         Cursor cursor = database.query(MySQLiteHelper.TABLE_COMMENTS,
@@ -75,7 +81,11 @@ public class CommentsDataSource {
         Comment comment = new Comment();
         comment.setId(cursor.getLong(0));
         comment.setComment(cursor.getString(1));
-        comment.setDetail(cursor.getString(2));
+        comment.setKg(cursor.getString(2));
+        comment.setMultiply(cursor.getString(3));
+        comment.setRm(cursor.getString(4));
+        comment.setDate(cursor.getString(5));
+        comment.setDetail(cursor.getString(6));
         return comment;
     }
 }

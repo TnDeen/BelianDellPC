@@ -15,6 +15,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_COMMENT = "comment";
     public static final String COLUMN_DETAIL = "detail";
 
+    public static final String COLUMN_KG = "kg";
+    public static final String COLUMN_MULTIPLY = "multiply";
+    public static final String COLUMN_RM = "rm";
+    public static final String COLUMN_DATE = "date";
+
     private static final String DATABASE_NAME = "commments.db";
     private static final int DATABASE_VERSION = 1;
 
@@ -23,6 +28,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + TABLE_COMMENTS + " (" + COLUMN_ID
             + " integer primary key autoincrement, "
             + COLUMN_COMMENT + " text not null, "
+            + COLUMN_KG + " text not null, "
+            + COLUMN_MULTIPLY + " text not null, "
+            + COLUMN_RM + " text not null, "
+            + COLUMN_DATE + " text not null, "
             + COLUMN_DETAIL + " text not null);";
 
     public MySQLiteHelper(Context context) {
