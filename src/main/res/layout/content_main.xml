@@ -74,7 +74,8 @@
             android:layout_above="@+id/etRM"
             android:layout_alignParentStart="true"
             android:inputType="numberDecimal"
-            android:digits="0123456789.,"/>
+            android:digits="0123456789.,"
+            android:imeOptions="actionDone"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -95,7 +96,8 @@
             android:layout_above="@+id/etRM"
             android:layout_alignParentStart="true"
             android:inputType="numberDecimal"
-            android:digits="0123456789.,"/>
+            android:digits="0123456789.,"
+            android:imeOptions="actionDone"/>
 
         <TextView
             android:layout_width="wrap_content"
