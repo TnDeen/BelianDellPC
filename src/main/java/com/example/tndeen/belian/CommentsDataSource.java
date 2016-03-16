@@ -34,14 +34,14 @@ public class CommentsDataSource {
         dbHelper.close();
     }
 
-    public Comment createComment(String comment) {
+    public Comment createComment(Comment comment) {
         ContentValues values = new ContentValues();
-        values.put(MySQLiteHelper.COLUMN_COMMENT, comment);
-        values.put(MySQLiteHelper.COLUMN_KG, "1.2");
-        values.put(MySQLiteHelper.COLUMN_MULTIPLY, "3.5");
-        values.put(MySQLiteHelper.COLUMN_RM, "34.67");
-        values.put(MySQLiteHelper.COLUMN_DATE, "11/02/1989");
-        values.put(MySQLiteHelper.COLUMN_DETAIL, "Details");
+        values.put(MySQLiteHelper.COLUMN_COMMENT, comment.getComment());
+        values.put(MySQLiteHelper.COLUMN_KG, comment.getKg());
+        values.put(MySQLiteHelper.COLUMN_MULTIPLY, comment.getMultiply());
+        values.put(MySQLiteHelper.COLUMN_RM, comment.getRm());
+        values.put(MySQLiteHelper.COLUMN_DATE, comment.getDate());
+        values.put(MySQLiteHelper.COLUMN_DETAIL, comment.getDetail());
         long insertId = database.insert(MySQLiteHelper.TABLE_COMMENTS, null,
                 values);
         Cursor cursor = database.query(MySQLiteHelper.TABLE_COMMENTS,

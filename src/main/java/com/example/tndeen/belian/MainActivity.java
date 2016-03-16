@@ -20,12 +20,17 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
+    private CommentsDataSource datasource;
+
     Button btnAdd = null;
     Button btnCal = null;
     EditText etName = null;
     EditText etKg = null;
+    EditText etMultiply= null;
     EditText etRm = null;
     EditText etDetail = null;
+    EditText etDate = null;
+
 
     private DatePicker datePicker;
     private Calendar calendar;
@@ -39,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        datasource = new CommentsDataSource(this);
+        datasource.open();
+
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(this);
         btnCal = (Button) findViewById(R.id.btnCal);
@@ -46,8 +54,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         etName = (EditText) findViewById(R.id.etName);
         etKg = (EditText) findViewById(R.id.etKG);
+        etMultiply = (EditText) findViewById(R.id.etMultiply);
         etRm = (EditText) findViewById(R.id.etRM);
         etDetail = (EditText) findViewById(R.id.etDetail);
+        etDate = (EditText) findViewById(R.id.etDate);
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -94,18 +104,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
+        Comment comment = null;
         switch(v.getId()) {
             case R.id.btnAdd:
-                final StringBuilder str = new StringBuilder();
-                str.append(etName.getText().toString());
-                str.append(etKg.getText().toString());
-                str.append(etRm.getText().toString());
-                str.append(etDetail.getText().toString());
-                Toast.makeText(MainActivity.this, str.toString(), Toast.LENGTH_SHORT).show();
+                comment = new Comment();
+                comment.setComment(etName.getText().toString());
+                comment.setKg(etKg.getText().toString());
+                comment.setMultiply(etMultiply.getText().toString());
+                float kg =  Float.parseFloat(etKg.getText().toString());
+                float multiply =  Float.parseFloat(etMultiply.getText().toString());
+                final float rm = (kg * multiply);
+                etRm.setText(String.valueOf(rm));
+                comment.setRm(etRm.getText().toString());
+                comment.setDetail(etDetail.getText() == null ? "" : etDetail.getText().toString());
+                comment.setDate(etDate.getText().toString());
+
+                final Comment saveComm = datasource.createComment(comment);
+
+                Toast.makeText(MainActivity.this, "Data Save!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btnCal:
                 showDialog(999);
-                Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT)
+                Toast.makeText(getApplicationContext(), "Select Date!", Toast.LENGTH_SHORT)
                         .show();
             default:
                 break;
@@ -138,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     };
 
     private void showDate(int year, int month, int day) {
-        etDetail.setText(new StringBuilder().append(day).append("/")
+        etDate.setText(new StringBuilder().append(day).append("/")
                 .append(month).append("/").append(year));
     }
 }

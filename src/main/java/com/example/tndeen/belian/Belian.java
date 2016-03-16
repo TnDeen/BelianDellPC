@@ -70,8 +70,18 @@ public class Belian extends ListActivity {
                 String[] comments = new String[] { "Cool", "Very nice", "Hate it" };
                 int nextInt = new Random().nextInt(3);
                 // save the new comment to the database
-                comment = datasource.createComment(comments[nextInt]);
-                adapter.add(comment);
+
+                final String str = "Sample";
+                comment = new Comment();
+                comment.setComment(str);
+                comment.setKg(str);
+                comment.setMultiply(str);
+                comment.setRm(str);
+                comment.setDetail(str);
+                comment.setDate(str);
+
+                final Comment saveComm  = datasource.createComment(comment);
+                adapter.add(saveComm);
                 break;
             case R.id.delete:
                 if (getListAdapter().getCount() > 0) {

@@ -12,29 +12,98 @@
     tools:context="com.example.tndeen.belian.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <EditText
-        android:id="@+id/etName"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="15dp"
-        android:layout_above="@+id/etKG"
-        android:autoText="false" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true">
 
-    <EditText
-        android:id="@+id/etKG"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="15dp"
-        android:autoText="false"
-        android:layout_above="@+id/etRM"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="43dp" />
+        <Button
+            android:id="@+id/btnCal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/date"/>
+
+        <EditText
+            android:id="@+id/etDate"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:autoText="false"
+            android:focusable="false"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Nama"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:layout_above="@+id/etKG"
+            android:autoText="false" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="KG"
+            android:id="@+id/textView"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/etKG"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:autoText="false"
+            android:layout_above="@+id/etRM"
+            android:layout_alignParentStart="true"
+            android:inputType="numberDecimal"
+            android:digits="0123456789.,"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Harga/Kg"
+            android:id="@+id/textView5"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/etMultiply"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:autoText="false"
+            android:layout_above="@+id/etRM"
+            android:layout_alignParentStart="true"
+            android:inputType="numberDecimal"
+            android:digits="0123456789.,"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="RM"
+            android:id="@+id/textView2"
+            android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/etRM"
@@ -47,7 +116,15 @@
         android:autoText="false"
         android:layout_above="@+id/etDetail"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="86dp" />
+        android:focusable="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Nota"
+            android:id="@+id/textView3"
+            android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/etDetail"
@@ -58,29 +135,22 @@
         android:gravity="center"
         android:textSize="15dp"
         android:autoText="false"
-        android:layout_above="@+id/btnAdd"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="55dp" />
+        android:layout_above="@+id/btnAdd" />
 
-    <Button
-        android:id="@+id/btnCal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:text="@string/date" />
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_create"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="15dp" />
+    </LinearLayout>
 
 
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/title_create"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="15dp"
-        android:layout_marginBottom="63dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+
+
+
+
+
 </RelativeLayout>
