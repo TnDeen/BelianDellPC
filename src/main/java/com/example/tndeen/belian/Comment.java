@@ -72,6 +72,7 @@ public class Comment {
     // Will be used by the ArrayAdapter in the ListView
     @Override
     public String toString() {
-        return comment + "-" + kg + "-" + multiply + "-" + rm + "-" + date + "-" + detail;
+        return id + ". Nama: "+ comment + "\n" + "KG: " + kg + " * "  + multiply + "=" + rm + "\n"
+                + "Pada: " + date + "\n" +"Nota: " + detail;
     }
 }

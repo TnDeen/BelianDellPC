@@ -107,21 +107,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Comment comment = null;
         switch(v.getId()) {
             case R.id.btnAdd:
-                comment = new Comment();
-                comment.setComment(etName.getText().toString());
-                comment.setKg(etKg.getText().toString());
-                comment.setMultiply(etMultiply.getText().toString());
-                float kg =  Float.parseFloat(etKg.getText().toString());
-                float multiply =  Float.parseFloat(etMultiply.getText().toString());
-                final float rm = (kg * multiply);
-                etRm.setText(String.valueOf(rm));
-                comment.setRm(etRm.getText().toString());
-                comment.setDetail(etDetail.getText() == null ? "" : etDetail.getText().toString());
-                comment.setDate(etDate.getText().toString());
 
-                final Comment saveComm = datasource.createComment(comment);
+                if (etName.getText().length() == 0
+                        || etKg.getText().length() == 0
+                        || etMultiply.getText().length() == 0
+                        || etDate.getText().length() == 0){
+                    Toast.makeText(getApplicationContext(), "Please Complete Form!", Toast.LENGTH_SHORT)
+                            .show();
+                } else {
 
-                Toast.makeText(MainActivity.this, "Data Save!", Toast.LENGTH_SHORT).show();
+                    comment = new Comment();
+                    comment.setComment(etName.getText().toString());
+                    comment.setKg(etKg.getText().toString());
+                    comment.setMultiply(etMultiply.getText().toString());
+                    float kg = Float.parseFloat(etKg.getText().toString());
+                    float multiply = Float.parseFloat(etMultiply.getText().toString());
+                    final float rm = (kg * multiply);
+                    etRm.setText(String.valueOf(rm));
+                    comment.setRm(etRm.getText().toString());
+                    comment.setDetail(etDetail.getText() == null ? "" : etDetail.getText().toString());
+                    comment.setDate(etDate.getText().toString());
+
+                    final Comment saveComm = datasource.createComment(comment);
+
+                    etName.setText("");
+                    etKg.setText("");
+                    etRm.setText("");
+                    etDetail.setText("");
+                    Toast.makeText(MainActivity.this, "Data Save!", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.btnCal:
                 showDialog(999);
